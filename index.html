@@ -43,7 +43,7 @@
   @property --wp-r{ syntax:'<angle>'; inherits:true; initial-value:0deg; }
 
   :root{
-    /* Palette sampled directly from the Elevate Wellness logo */
+    /* Palette sampled directly from the Elevate Wellness logo, plus a hairline metallic accent for premium moments */
     --sage:#818D76;
     --sage-deep:#4F5749;
     --sage-pale:#E8EAE6;
@@ -53,6 +53,8 @@
     --rose-deep:#976E77;
     --rose-soft:#F5E8EB;
 
+    --gold:#B08D57;
+
     --cream:#FBF7F8;
     --cream-deep:#F1E9EA;
     --ink:#332F2C;
@@ -60,6 +62,7 @@
     --white:#FFFFFF;
 
     --shadow: 0 30px 60px -30px rgba(51,47,44,0.28);
+    --shadow-soft: 0 18px 40px -22px rgba(51,47,44,0.24);
     --ease: cubic-bezier(.2,.8,.2,1);
   }
 
@@ -217,10 +220,10 @@
     padding:16px 32px;
     font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
     border:1px solid var(--ink); background:var(--ink); color:var(--cream);
-    transition:all .3s ease;
+    transition:all .3s var(--ease);
     white-space:nowrap;
   }
-  .btn:hover{ background:transparent; color:var(--ink); }
+  .btn:hover{ background:transparent; color:var(--ink); box-shadow:var(--shadow-soft); transform:translateY(-1px); }
   .btn.outline{ background:transparent; color:var(--ink); border:1px solid var(--ink); }
   .btn.outline:hover{ background:var(--ink); color:var(--cream); }
   .btn.rose{ background:var(--rose-deep); border-color:var(--rose-deep); color:#fff; }
@@ -229,6 +232,7 @@
   .btn.sage:hover{ background:transparent; color:var(--sage-deep); }
   .btn.small{ padding:12px 22px; font-size:11.5px; }
   .btn svg{ width:15px; height:15px; }
+  .btn:disabled{ opacity:.6; cursor:default; transform:none; box-shadow:none; }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -247,7 +251,7 @@
   .hero-logo-mark{ height:120px; width:auto; margin-bottom:28px; opacity:0; animation:riseIn .8s ease .05s forwards; }
   .hero-copy .eyebrow{ margin-bottom:18px; opacity:0; animation:riseIn .8s ease .15s forwards; }
   .hero-copy h1{
-    font-size:clamp(40px, 5.4vw, 74px);
+    font-size:clamp(40px, 5.4vw, 76px);
     line-height:1.02; font-weight:500;
     opacity:0; animation:riseIn .9s ease .3s forwards;
   }
@@ -345,9 +349,14 @@
   .reviews-head h2{ font-size:clamp(28px,3.4vw,42px); margin-top:12px; }
   .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; container-type:inline-size; container-name:reviews; }
   @media(max-width:900px){ .review-grid{ grid-template-columns:1fr; } }
-  .review-card{ background:var(--white); border:1px solid var(--sage-line); padding:34px 30px; }
-  .review-card .stars{ font-size:14px; color:var(--rose-deep); letter-spacing:1px; }
-  .review-card p{ margin-top:16px; font-size:14.5px; line-height:1.75; color:var(--ink); }
+  .review-card{ position:relative; background:var(--white); border:1px solid var(--sage-line); padding:38px 34px 32px; box-shadow:var(--shadow-soft); transition:transform .3s var(--ease), box-shadow .3s var(--ease); }
+  .review-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
+  .review-card::before{
+    content:'\201C'; position:absolute; top:14px; right:22px; font-family:'Fraunces', serif; font-style:italic;
+    font-size:56px; line-height:1; color:var(--rose-soft); z-index:0;
+  }
+  .review-card .stars{ font-size:14px; color:var(--rose-deep); letter-spacing:1px; position:relative; z-index:1; }
+  .review-card p{ margin-top:16px; font-size:14.5px; line-height:1.75; color:var(--ink); position:relative; z-index:1; }
   .review-card .who{ margin-top:22px; font-size:12.5px; color:var(--ink-soft); font-weight:700; text-transform:uppercase; letter-spacing:0.06em; }
   .review-card .who span{ color:var(--sage-deep); }
   /* Container query: tighten card rhythm when the grid itself is narrow (e.g. inside a sidebar or narrow viewport) */
@@ -400,7 +409,7 @@
   .follow-inner{ position:relative; z-index:1; text-align:center; }
   .follow .eyebrow{ color:var(--ink); }
   .follow h2{ color:var(--ink); font-size:clamp(30px,3.8vw,48px); margin-top:12px; }
-  .follow p{ max-width:480px; margin:16px auto 0; var(--ink); font-size:15.5px; line-height:1.7; }
+  .follow p{ max-width:480px; margin:16px auto 0; color:var(--ink-soft); font-size:15.5px; line-height:1.7; }
   .follow-links{
     margin-top:44px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap;
   }
@@ -408,16 +417,17 @@
     display:flex; align-items:center; gap:16px;
     padding:20px 26px;
     min-width:280px;
-    border:1px solid rgba(251,247,248,0.22);
+    border:1px solid rgba(51,47,44,0.14);
     border-radius:16px;
-    background:rgba(251,247,248,0.04);
+    background:rgba(51,47,44,0.03);
     backdrop-filter:blur(6px);
-    transition:border-color .3s ease, background .3s ease, transform .3s var(--ink);
+    transition:border-color .3s ease, background .3s ease, transform .3s var(--ease), box-shadow .3s ease;
   }
   .follow-card:hover{
-    border-color:color-mix(in srgb, var(--rose-soft) 60%, transparent);
-    background:rgba(251,247,248,0.09);
+    border-color:color-mix(in srgb, var(--rose-deep) 45%, transparent);
+    background:rgba(51,47,44,0.05);
     transform:translateY(-3px);
+    box-shadow:var(--shadow-soft);
   }
   .follow-icon{
     display:flex; align-items:center; justify-content:center;
@@ -428,19 +438,27 @@
   .follow-icon svg{ width:22px; height:22px; }
   .follow-text{ display:flex; flex-direction:column; align-items:flex-start; text-align:left; }
   .follow-text strong{ font-family:'Fraunces', serif; font-size:18px; font-weight:500; color:var(--ink); }
-  .follow-text span{ font-size:12.5px; var(--ink); margin-top:2px; }
+  .follow-text span{ font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
   .follow-arrow{ width:16px; height:16px; margin-left:auto; opacity:.6; transition:transform .3s ease, opacity .3s ease; flex:none; }
   .follow-card:hover .follow-arrow{ transform:translate(3px,-3px); opacity:1; }
 
   /* ---------- Newsletter ---------- */
-  .newsletter{ background:var(--rose-soft); padding:90px 0; }
-  .nl-wrap{ max-width:620px; margin:0 auto; text-align:center; }
+  .newsletter{ position:relative; background:var(--rose-soft); padding:96px 0; overflow:hidden; }
+  .newsletter::before{
+    content:''; position:absolute; left:50%; top:0; width:1px; height:56px; background:var(--gold);
+    transform:translateX(-50%); opacity:.55;
+  }
+  .nl-wrap{ max-width:560px; margin:0 auto; text-align:center; }
+  .nl-wrap .ring-mark{ width:56px; height:56px; margin:0 auto 22px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .nl-wrap .ring-mark span{ font-family:'Fraunces', serif; font-style:italic; font-size:20px; color:var(--gold); }
   .nl-wrap h2{ font-size:clamp(28px,3.2vw,40px); margin-top:14px; }
   .nl-wrap p{ margin-top:16px; color:var(--ink-soft); font-size:15px; line-height:1.7; }
   .nl-form{ margin-top:32px; display:flex; gap:10px; max-width:420px; margin-left:auto; margin-right:auto; }
-  .nl-form input{ flex:1; border:1px solid var(--ink); background:var(--cream); padding:15px 18px; font-size:14px; font-family:inherit; color:var(--ink); }
-  .nl-form input:focus{ outline:2px solid var(--rose-deep); outline-offset:2px; }
-  .nl-note{ margin-top:14px; font-size:12px; color:var(--ink-soft); }
+  .nl-form input{ flex:1; border:1px solid var(--ink); background:var(--cream); padding:15px 18px; font-size:14px; font-family:inherit; color:var(--ink); transition:border-color .2s ease, box-shadow .2s ease; }
+  .nl-form input:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 0 3px color-mix(in srgb, var(--gold) 22%, transparent); }
+  .nl-note{ margin-top:16px; font-size:12.5px; color:var(--ink-soft); letter-spacing:0.01em; transition:color .2s ease; min-height:16px; }
+  .nl-note.success{ color:var(--sage-deep); font-weight:600; }
+  .nl-note.error{ color:var(--rose-deep); font-weight:600; }
 
   /* ---------- Footer ---------- */
   footer{ background:var(--ink); color:rgba(251,247,248,0.75); padding:80px 0 30px; }
@@ -735,17 +753,17 @@
     <div class="review-grid">
       <div class="review-card">
         <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-        <p>"Love my socks, very comfortable!"</p>
+        <p>Love my socks, very comfortable!</p>
         <div class="who">Carlton <span>· Grip Socks</span></div>
       </div>
       <div class="review-card">
         <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-        <p>"I bought the bundle as a gift for my mom, and she loved it. Every item feels premium and thoughtfully made — from the journal to the tumbler and hat, it felt like a luxury wellness gift."</p>
+        <p>I bought the bundle as a gift for my mom, and she loved it. Every item feels premium and thoughtfully made — from the journal to the tumbler and hat, it felt like a luxury wellness gift.</p>
         <div class="who">Mike <span>· Wellness Bundle</span></div>
       </div>
       <div class="review-card">
         <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-        <p>"I absolutely love my tumbler! The quality is amazing and it's the perfect size for my morning or evening tea. It reminds me to slow down and prioritize myself."</p>
+        <p>I absolutely love my tumbler! The quality is amazing and it's the perfect size for my morning or evening tea. It reminds me to slow down and prioritize myself.</p>
         <div class="who">Kalise <span>· Insulated Tumbler</span></div>
       </div>
     </div>
@@ -754,13 +772,14 @@
   <!-- NEWSLETTER -->
   <section class="newsletter reveal">
     <div class="nl-wrap container">
+      <div class="ring-mark"><span>E</span></div>
       <div class="eyebrow">Join the Journey</div>
       <h2>Stay close to your healing era</h2>
       <p>New drops, self-care rituals, and first access to new Etsy listings — straight to your inbox.</p>
-      <form class="nl-form" id="nlForm">
+	  <form class="nl-form" id="nlForm" action="https://formspree.io/f/mrpgqggn" method="POST">
         <label for="nlEmail" class="visually-hidden" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);">Email address</label>
-        <input id="nlEmail" type="email" placeholder="Your email address" required autocomplete="email">
-        <button class="btn rose" type="submit">Subscribe</button>
+        <input type="email" id="nlEmail" name="nlEmail" placeholder="Your email address" required autocomplete="email">
+        <button type="submit" class="btn rose" id="nlSubmit">Subscribe</button>
       </form>
       <div class="nl-note" id="nlNote">No spam, just gentle reminders to take care of yourself.</div>
     </div>
@@ -876,11 +895,42 @@
     if(e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
   });
 
-  // Newsletter (demo — no backend wired up)
-  document.getElementById('nlForm').addEventListener('submit', (e) => {
+  // Newsletter — submit to Formspree in the background (fetch, not a normal
+  // form POST) so the browser never navigates to Formspree's own confirmation
+  // page. The visitor stays right here and sees our own inline message, and
+  // you still get the email notification from Formspree as before.
+  const nlForm = document.getElementById('nlForm');
+  const nlNote = document.getElementById('nlNote');
+  const nlSubmit = document.getElementById('nlSubmit');
+
+  nlForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    document.getElementById('nlNote').textContent = "You're on the list — welcome to the Healing Era community.";
-    e.target.reset();
+
+    nlSubmit.disabled = true;
+    nlNote.classList.remove('success', 'error');
+    nlNote.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(nlForm.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(nlForm)
+      });
+
+      if (response.ok) {
+        nlNote.textContent = "You're on the list — welcome to the Healing Era community.";
+        nlNote.classList.add('success');
+        nlForm.reset();
+      } else {
+        nlNote.textContent = 'Something went wrong — please try again in a moment.';
+        nlNote.classList.add('error');
+      }
+    } catch (err) {
+      nlNote.textContent = 'Something went wrong — please try again in a moment.';
+      nlNote.classList.add('error');
+    } finally {
+      nlSubmit.disabled = false;
+    }
   });
 })();
 </script>
