@@ -84,9 +84,11 @@
   }
 
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   body{
     margin:0;
+    max-width:100vw;
+    overflow-x:hidden;
     background:var(--cream);
     color:var(--ink);
     font-family:'Manrope', sans-serif;
@@ -204,6 +206,7 @@
     gap:24px;
     padding:14px 32px;
     max-width:1240px; margin:0 auto;
+    width:100%;
   }
 
   /* Brand mark: fixed, intrinsic-ratio box so the logo can never stretch or squash,
@@ -214,7 +217,7 @@
     object-fit:contain; object-position:left center;
     transition:height .25s ease;
   }
-  header.site.scrolled .brand img{ height:96px; }
+  header.site.scrolled .brand img{ height:90px; }
 
   nav.primary{ display:flex; align-items:center; gap:30px; }
   nav.primary a{
@@ -242,9 +245,13 @@
   @media(max-width:980px){
     nav.primary{ display:none; }
     .burger{ display:flex; }
-    .nav-row{ padding:12px 20px; }
-    .brand img{ height:96px; }
+    .nav-row{ padding:10px 16px; gap:12px; }
+    .brand{ min-width:0; }
+    .brand img{ height:96px; max-width:38vw; }
     header.site.scrolled .brand img{ height:72px; }
+    /* Redundant with the bottom quick-nav bar's Etsy link — drop it here so the
+       header never has to fit a full pill button alongside a 96px logo. */
+    .nav-actions .btn.small{ display:none; }
   }
 
   /* ---------- Buttons ---------- */
