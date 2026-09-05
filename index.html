@@ -575,6 +575,48 @@
   .mobile-menu .msocial a{ font-size:13px; text-transform:uppercase; letter-spacing:0.06em; font-weight:700; color:var(--sage-deep); }
 
   ::selection{ background:var(--rose-soft); color:var(--ink); }
+
+  /* ---------- Meet the Founder ---------- */
+  .founder{ padding:100px 0 110px; position:relative; z-index:0; }
+  .founder-grid{
+    display:grid; grid-template-columns:0.85fr 1fr; align-items:center; gap:72px;
+  }
+  .founder-media{ position:relative; }
+  .founder-media::before{
+    content:''; position:absolute; inset:-18px -18px auto auto; width:78%; height:78%;
+    background:var(--sage-pale); border-radius:18px; z-index:0;
+  }
+  .founder-portrait{
+    position:relative; z-index:1; overflow:hidden; border-radius:18px;
+    box-shadow:var(--shadow); aspect-ratio:4/5;
+  }
+  .founder-portrait img{ width:100%; height:100%; object-fit:cover; }
+  .founder-copy{ position:relative; z-index:1; }
+  .founder-copy .ring-mark{
+    width:52px; height:52px; margin-bottom:22px; border:1px solid var(--rose-deep);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+  }
+  .founder-copy .ring-mark span{ font-family:'Fraunces', serif; font-style:italic; font-size:18px; color:var(--rose-deep); }
+  .founder-copy h2{ font-size:clamp(28px,3.2vw,42px); line-height:1.2; margin-top:16px; font-weight:400; }
+  .founder-copy h2 em{ font-style:italic; color:var(--rose-deep); font-weight:500; }
+  .founder-copy p{ margin-top:20px; line-height:1.8; font-size:15.5px; color:var(--ink-soft); max-width:520px; }
+  .founder-copy p + p{ margin-top:16px; }
+  .founder-copy .signature-line{
+    margin-top:28px; display:flex; align-items:center; gap:14px;
+    font-family:'Fraunces', serif; font-style:italic; font-size:18px; color:var(--sage-deep);
+  }
+  .founder-copy .signature-line .dot{ width:5px; height:5px; border-radius:50%; background:var(--rose-deep); }
+  .founder-copy .signature-role{ font-family:'Manrope', sans-serif; font-style:normal; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; }
+  @media(max-width:900px){
+    .founder{ padding:76px 0 84px; }
+    .founder-grid{ grid-template-columns:1fr; gap:40px; }
+    .founder-media::before{ width:90%; height:90%; }
+    .founder-portrait{ max-width:380px; margin:0 auto; }
+    .founder-copy{ text-align:center; }
+    .founder-copy .ring-mark{ margin-left:auto; margin-right:auto; }
+    .founder-copy p{ margin-left:auto; margin-right:auto; }
+    .founder-copy .signature-line{ justify-content:center; }
+  }
 </style>
 </head>
 <body>
@@ -594,6 +636,7 @@
       <a href="#shop">Shop Categories</a>
 	        <a href="#follow">Follow Us</a>
       <a href="#story">Our Story</a>
+      <a href="#founder">Meet the Founder</a>
       <a href="#reviews">Reviews</a>
 
     </nav>
@@ -616,6 +659,7 @@
   <nav aria-label="Mobile">
     <a href="#shop">Shop Categories</a>
     <a href="#story">Our Story</a>
+    <a href="#founder">Meet the Founder</a>
     <a href="#reviews">Reviews</a>
 
     <a href="https://www.etsy.com/shop/ElevateWellnessmi" target="_blank" rel="noopener">Shop on Etsy</a>
@@ -707,6 +751,30 @@
     <div class="eyebrow" style="margin-bottom:20px;">Mind · Body · Healing · Growth</div>
     <h2>Wellness is not a moment: it's a lifestyle. Every piece we make is <em>a quiet invitation</em> to slow down and choose yourself.</h2>
     <div class="signature-line">Elevate Wellness Co. <span class="dot"></span> Est. 2026</div>
+  </section>
+
+  <!-- MEET THE FOUNDER -->
+  <section class="founder container reveal" id="founder">
+    <svg class="sprig rose" aria-hidden="true" viewBox="0 0 60 100" style="top:-10px; left:2%; width:34px; height:60px;">
+      <path d="M30 95 C30 60 30 40 30 5"/>
+      <path d="M30 20 C20 12 12 12 6 6"/>
+      <path d="M30 40 C40 32 48 32 54 26"/>
+    </svg>
+    <div class="founder-grid">
+      <div class="founder-media">
+        <div class="founder-portrait">
+          <img src="images/brandi.png" alt="Brandi, founder of Elevate Wellness, journaling while wearing Healing Era grip socks" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="founder-copy">
+        <div class="ring-mark"><span>E</span></div>
+        <div class="eyebrow">Meet the Founder</div>
+        <h2>Hi, I'm <em>Brandi</em>, founder of Elevate Wellness.</h2>
+        <p>After more than a decade of working in the helping profession, I've seen how easy it is for women to pour into everyone and everything around them while placing themselves last. I created Elevate Wellness from the belief that wellness should feel intentional, accessible, and personal. It can look like moving your body, protecting your peace, setting boundaries, slowing down, reflecting, or simply making more space for yourself.</p>
+        <p>Elevate Wellness was created to support women in prioritizing their well-being and creating lives that feel more aligned, balanced, and fulfilling. My hope is that this brand becomes more than a place to shop. I want it to be a space for encouragement, wellness inspiration, thoughtful resources, and products that support you through every season of growth.</p>
+        <div class="signature-line">Brandi <span class="dot"></span> <span class="signature-role">Mind. Body. Healing. Growth.</span></div>
+      </div>
+    </div>
   </section>
 
   <!-- SHOP CATEGORIES -->
@@ -833,8 +901,9 @@
     <div class="nl-wrap container">
       <div class="ring-mark"><span>E</span></div>
       <div class="eyebrow">Join the Journey</div>
-      <h2>Stay close to your healing era</h2>
-      <p>New drops, self-care rituals, and first access to new Etsy listings — straight to your inbox.</p>
+      <h2>Stay connected to your wellness journey</h2>
+      <p>Subscribe for weekly wellness reflections, practical self-care tips, encouragement for intentional living, and first access to new Elevate Wellness drops.</p>
+	  
 	  <form class="nl-form" id="nlForm" action="https://formspree.io/f/mrpgqggn" method="POST">
         <label for="nlEmail" class="visually-hidden" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);">Email address</label>
         <input type="email" id="nlEmail" name="nlEmail" placeholder="Your email address" required autocomplete="email">
@@ -867,6 +936,7 @@
       <div class="foot-col">
         <h4>About</h4>
         <a href="#story">Our Story</a>
+        <a href="#founder">Meet the Founder</a>
         <a href="#reviews">Reviews</a>
         <a href="https://www.etsy.com/shop/ElevateWellnessmi" target="_blank" rel="noopener">Shop Policies</a>
       </div>
